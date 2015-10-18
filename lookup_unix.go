@@ -48,7 +48,7 @@ func lookupUnix(gid int, groupname string, lookupByName bool) (*Group, error) {
 	if runtime.GOOS == "freebsd" {
 		panic("Don't know how to deal with freebsd.")
 	} else {
-		bufSize = C.sysconf(C._SC_GETGR_R_SIZE_MAX)
+		bufSize = C.sysconf(C._SC_GETGR_R_SIZE_MAX) * 20
 		if bufSize <= 0 || bufSize > 1<<20 {
 			return nil, fmt.Errorf("group: unreasonable _SC_GETGR_R_SIZE_MAX of %d", bufSize)
 		}
